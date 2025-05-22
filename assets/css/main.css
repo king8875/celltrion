@@ -1,0 +1,14 @@
+main{}
+
+.container{}
+
+
+
+
+.visual_section{}
+.visual_section .visual_inner{}
+.visual_section .visual_inner .visual_overlay{
+    padding: 0 100px;
+    overflow: hidden;
+    width: 100%;
+}
