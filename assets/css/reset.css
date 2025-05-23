@@ -3,6 +3,18 @@
     --beige: #f1ebc9;
     --white: #fff;
     --font-en: 'BebasNeue-Regular','Pretendard', sans-serif;
+
+    --visual-line-top-fix: 120px;
+    --visual-line-side-fix: 40px;
+    --visual-line-top: 120px;
+    --visual-line-side: 40px;
+    --visual-line-progress: 0%;
+
+    --cell-blur: 0px;
+    --cell-opacity: 1;
+    --border-radius:40px;
+    --updown-padding:160px;
+    --side-padding:88px;
 }
 *{
     padding: 0;
@@ -26,4 +38,10 @@ button {
     margin: 0;
     border: none;
     background: none;
+}
+
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
 }

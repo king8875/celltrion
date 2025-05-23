@@ -7,8 +7,13 @@
 /* header */
 
 header{
-    position: relative;
-    background: #888;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+header.active{
+    background: #ccc;
 }
 header .header_inner{
     display: flex;
