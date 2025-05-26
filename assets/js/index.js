@@ -3,6 +3,12 @@
 // aTag.addEventListener('click',function(e){
 //     e.preventDefalut();
 // })
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+
+// header js
 const header = document.querySelector("#header");
 window.addEventListener("scroll", function () {
     if (window.scrollY > 50) {
@@ -15,6 +21,8 @@ window.addEventListener("scroll", function () {
 
 
 
+
+// business_section js
 const swiper = new Swiper(".first-swiper.swiper", {
     grabCursor: true,
     slidesPerView: 1,
@@ -36,76 +44,86 @@ const swiper = new Swiper(".first-swiper.swiper", {
         },
     },
 });
-// const swiper01 = new Swiper(".first-swiper",{
-//     loop: true,
-//     navigation: {
-//         nextEl: '.swiper-button-next',
-//         prevEl: '.swiper-button-prev',
-//     },
-// })
 
 
 
-// 왼쪽 탭 슬라이드 (vertical 방향)
+// products_section js 
+
 const leftSwiper = new Swiper(".left-tab-swiper", {
     direction: "vertical",
-    slidesPerView: 7, // 한 번에 7개 슬라이드
+    slidesPerView: "auto", 
     spaceBetween: 10,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev"
     },
-    slideToClickedSlide: true, // 클릭한 탭으로 이동
+    slideToClickedSlide: true,
    
 });
 
-// 오른쪽 콘텐츠 슬라이드
+
 const rightSwiper = new Swiper(".right-content-swiper", {
-    slidesPerView: 3, // 3개의 슬라이드를 보여준다
-    spaceBetween: 10,
+    slidesPerView: 'auto',
+    spaceBetween: 20,
 
     thumbs: {
-        swiper: leftSwiper // 왼쪽 탭 슬라이드와 연결
+        swiper: leftSwiper
     },
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev"
     },
-    
 });
 
 
 
-// const leftSwiper = new Swiper(".left-tab-swiper", {
-//     direction: "vertical",
-//     slidesPerView: 7,
-//     spaceBetween: 10,
-//     mousewheel: true,
-//     // watchSlidesProgress: true,
-//     // slideToClickedSlide: true,
-//     navigation: {
-//         nextEl: ".products_section .swiper-button-next",
-//         prevEl: ".products_section .swiper-button-prev",
+
+// magazine-section js
+
+
+// const cardItem = document.querySelector(".card-item:nth-child(1)");
+
+
+const test = gsap.timeline();
+
+test.to('.card-item:nth-child(3)',{
+    scrollTrigger: {
+        trigger:'.magazine_section',
+        start:"0% 0%",
+        end: "100% 100%",
+        scrub:1,
+        markers:true,
+    },
+    y:-300,    
+    scale:"0.9"
+});
+
+// const cardAni = gsap.timeline(".card-item:nth-child(2)",{
+//     scrollTrigger: {
+//         trigger: '.magazine_section',
+//         start:"0% 0%",
+//         end: "100% 100%",
+//         scrub:1,
+//         markers: true,
 //     },
-
+// })
+// cardAni.to(cardItem,{
+//     y:100
 // });
 
-// const rightSwiper = new Swiper(".right-content-swiper", {
-//     slidesPerView: 3,
-//     spaceBetween: 10,
-//     centeredSlides: true,
 
-//     thumbs: {
-//         swiper: leftSwiper,
+// const sidepj = gsap.timeline({
+//     scrollTrigger: {
+//         trigger:'.sidepj-sec',
+//         start:"0% 0%",
+//         end:"100% 100%",
+//         scrub:1,
+//         onEnter: function(){
+//             gsap.to('.bottom-overlay',{autoAlpha:0});
+//             document.querySelector('.custom-cursor').classList.add('white');
+//         },
+//         onLeaveBack: function(){
+//             gsap.to('.bottom-overlay',{autoAlpha:1});
+//         }
 //     },
-// });
-
-
-// // 동기화
-// leftSwiper.on("slideChange", function () {
-//     rightSwiper.slideTo(leftSwiper.activeIndex);
-// });
-
-// rightSwiper.on("slideChange", function () {
-//     leftSwiper.slideTo(rightSwiper.activeIndex);
 // });
