@@ -2,7 +2,7 @@
 const lenis = new Lenis();
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => {
-    lenis.raf(time * 900);
+    lenis.raf(time * 1000);
 });
 gsap.ticker.lagSmoothing(0);
 
@@ -32,10 +32,13 @@ const gnbItem = $('.gnb_item');
 const gnbList = $('.sub-gnb_list');
 
 gnbItem.on("mouseenter", function () {
+    gnbItem.css("color","#ccc");
+    $(this).css("color","#000");
     $(this).addClass('active');
     $(this).find('.sub-gnb_list').addClass('active');
 });
 gnbItem.on("mouseleave", function () {
+    gnbItem.css("color","#000");
     $(this).removeClass('active');
     $(this).find(gnbList).removeClass('active');
 });
@@ -118,8 +121,8 @@ const cardAni = gsap.timeline({
         scrub: 1,
     },
 });
-cardAni.set(cardItem02, { yPercent: 140 })
-cardAni.set(cardItem01, { yPercent: 140 })
+cardAni.set(cardItem02, { yPercent: 140, scale:1.2 })
+cardAni.set(cardItem01, { yPercent: 140, scale:1.2 })
 cardAni.to(cardItem03, {
     yPercent: -5,
     scale: 0.9
@@ -127,8 +130,7 @@ cardAni.to(cardItem03, {
 cardAni.to(cardItem02, {
     yPercent: 0,
     scale: 0.9,
-    filter: "brightness(0.9)"
-
+    // filter: "brightness(0.9)"
 });
 cardAni.to(cardItem01, {
     yPercent: 5,
@@ -149,10 +151,9 @@ tl6.from('.prove-sec02 .pr-block', { '--x': 1 }, "<")
 
 
 
-
+// tab 기능
 document.querySelectorAll('.tab--btn').forEach(function (tab) {
     tab.addEventListener('click', function () {
-        // 모든 탭에서 active 클래스 제거
         document.querySelectorAll('.tab--btn').forEach(function (item) {
             item.classList.remove('active');
         });
@@ -163,10 +164,8 @@ document.querySelectorAll('.tab--btn').forEach(function (tab) {
             swiper.classList.remove('active');
         });
 
-        // 클릭한 탭에 active 클래스 추가
         this.classList.add('active');
 
-        // data-tab 속성으로 연결된 콘텐츠 활성화
         const target = this.getAttribute('data-tab');
         const targetPanel = document.getElementById(target);
         if (targetPanel) {
@@ -177,15 +176,7 @@ document.querySelectorAll('.tab--btn').forEach(function (tab) {
 
 
 
-
-
-
 // about section tab list js
-
-
-
-
-
 
 
 
@@ -195,10 +186,7 @@ document.querySelectorAll('.tab--btn').forEach(function (tab) {
 const aboutSwiper = new Swiper(".swiper_section .swiper", {
     grabCursor: true,
     slidesPerView: "auto",
-    // slidesPerView: 1.1,
-    // effect: "creative",
     spaceBetween: 20,
-
     navigation: {
         nextEl: '.business_section .swiper-button-next',
         prevEl: '.business_section .swiper-button-prev',
@@ -207,9 +195,6 @@ const aboutSwiper = new Swiper(".swiper_section .swiper", {
         el: '.swiper_section .swiper-pagination',
     },
 });
-
-
-
 
 // footer js
 const select = document.querySelector('.select_sub--list');
@@ -237,15 +222,10 @@ ScrollTrigger.create({
         document.querySelector(".footerTopBtn").classList.remove("active");
     },
 })
-
-
-
-
-// 타임라인 정의
+// history point progress bar 애니메이션
 const progressBar = gsap.timeline();
 const pointerEl = gsap.timeline();
 
-// 애니메이션 정의
 progressBar.from(".history_bar_on", { height: 0, ease: "none" });
 pointerEl.from(".pointer", { top: 0, ease: "none" });
 
@@ -268,7 +248,7 @@ ScrollTrigger.create({
 
 
 
-
+// history year 애니메이션
 document.querySelectorAll('.year_ctn').forEach((el) => {
     const yearTitle = el.querySelector('.year_tit');
     const yearImg = el.querySelector('.year_img');
@@ -290,9 +270,6 @@ document.querySelectorAll('.year_ctn').forEach((el) => {
         }
     });
 });
-
-
-
 
 
 
@@ -367,8 +344,4 @@ mm.add("(max-width: 1399px)", function () {
         },
         slideToClickedSlide: true,
     });
-
-
-
-
 });
