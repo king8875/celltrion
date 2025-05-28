@@ -134,10 +134,8 @@ header .header_inner .lang_more--btn .lang_icon{
 
 /* media query *//* media query *//* media query *//* media query *//* media query *//* media query *//* media query *//* media query */
 @media (min-width:1600px) and (max-width:1920px) {
-    header .header_inner{
-        padding: 10px;
-    }
- }
+    header .header_inner{ padding: 10px; }
+}
 @media (min-width:1400px) and (max-width:1599px) { }
 @media (max-width:1399px) {
     header .header_inner{ padding: 10px; }
