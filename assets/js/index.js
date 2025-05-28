@@ -7,72 +7,53 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 
 
-// header js
-// const aTag = document.querySelectorAll("a");
-// aTag.addEventListener('click',function(e){
-//     e.preventDefalut();
-// })
+//header gsap
+let lastScrollY = window.scrollY;
+const header = document.querySelector('#header');
+
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY) {
+        gsap.to(header, { y: '-100%', duration: 0.5 });
+        header.classList.add("active");
+    }
+
+    else {
+        gsap.to(header, { y: '0%', duration: 0.5 });
+        // header.classList.remove("active")
+    }
+    lastScrollY = currentScrollY;
+});
 
 
-// common js
+// 헤더 서브 매뉴 애니메이션
+const gnbItem = $('.gnb_item');
+const gnbList = $('.sub-gnb_list');
+
+gnbItem.on("mouseenter", function () {
+    $(this).addClass('active');
+    $(this).find('.sub-gnb_list').addClass('active');
+});
+gnbItem.on("mouseleave", function () {
+    $(this).removeClass('active');
+    $(this).find(gnbList).removeClass('active');
+});
 
 
-// const moreBtn = document.querySelector(".btn_more");
 
-// moreBtn.addEventListener("mouseenter",function(){
-//     document.querySelector(".btn_more .more_ic::before").classList.add('active');
-// });
-
-// const moreBtn = document.querySelector(".btn_more");
-
-// moreBtn.addEventListener("mouseenter", function() {
-//   moreBtn.classList.add("active");
-// });
-// moreBtn.addEventListener("mouseleave", function() {
-//   moreBtn.classList.remove("active");
-// });
-
+// 더보기 버튼 애니메이션
 const moreBtns = document.querySelectorAll(".btn_more");
 
 moreBtns.forEach(function (btn) {
-    btn.addEventListener("mouseenter", function () {
-        btn.classList.add("active");
-    });
-
-    btn.addEventListener("mouseleave", function () {
-        btn.classList.remove("active");
-    });
+    btn.addEventListener("mouseenter", function () { btn.classList.add("active"); });
+    btn.addEventListener("mouseleave", function () { btn.classList.remove("active"); });
 });
 
-// header js
-const header = document.querySelector("#header");
-window.addEventListener("scroll", function () {
-    if (window.scrollY > 50) {
-        header.classList.add("active")
-    } else {
-        header.classList.remove("active")
-    }
-});
-
-// gsap.to("#header", {
-//     opacity: 1,
-//     y: 0,
-//     duration: 0.6,
-//     scrollTrigger: {
-//         trigger: "#header",
-//         start: "top 80%", // 시작 시점
-//         end: "top 50%",   // 끝 시점
-//         toggleActions: "play reverse play reverse", // 아래 → 위 → 아래 → 위
-//         markers: true, // 디버깅용 마커
-//     }
-// });
 
 
 // visual section
-
-const visual = document.querySelector('.visual_inner');
-
-
+const visual = document.querySelector('.visual_section .visual_inner');
 
 const visualAni = gsap.timeline({
     scrollTrigger: {
@@ -82,45 +63,23 @@ const visualAni = gsap.timeline({
         scrub: 1,
     },
 });
-visualAni.to(visual, {
-    width: "100vw"
-});
-
-
-
-
-
+visualAni.to(visual, { width: "99vw" });
 
 
 
 // business_section js
 const swiper = new Swiper(".first-swiper.swiper", {
     grabCursor: true,
-    // slidesPerView: "auto",
     slidesPerView: 1.1,
-    // effect: "creative",
     spaceBetween: 20,
-
     navigation: {
         nextEl: '.business_section .swiper-button-next',
         prevEl: '.business_section .swiper-button-prev',
     },
-    // creativeEffect: {
-    //     prev: {
-    //         shadow: true,
-    //         translate: ["-120%", 0, -100],
-    //     },
-    //     next: {
-    //         shadow: true,
-    //         translate: ["120%", 0, -100],
-    //     },
-    // },
 });
 
 
-
 // products_section js 
-
 const leftSwiper = new Swiper(".left-tab-swiper", {
     direction: "vertical",
     slidesPerView: "auto",
@@ -130,14 +89,12 @@ const leftSwiper = new Swiper(".left-tab-swiper", {
         prevEl: ".swiper-button-prev"
     },
     slideToClickedSlide: true,
-
 });
 
 
 const rightSwiper = new Swiper(".right-content-swiper", {
     slidesPerView: 'auto',
     spaceBetween: 20,
-
     thumbs: {
         swiper: leftSwiper
     },
@@ -148,15 +105,10 @@ const rightSwiper = new Swiper(".right-content-swiper", {
 });
 
 
-
-
 // magazine-section js
-
-
 const cardItem01 = document.querySelector(".card-list .card-item:nth-child(1)");
 const cardItem02 = document.querySelector(".card-list .card-item:nth-child(2)");
 const cardItem03 = document.querySelector(".card-list .card-item:nth-child(3)");
-
 
 const cardAni = gsap.timeline({
     scrollTrigger: {
@@ -183,7 +135,6 @@ cardAni.to(cardItem01, {
     scale: 0.9
 });
 
-
 //prove gsap
 const tl6 = gsap.timeline({
     scrollTrigger: {
@@ -195,50 +146,6 @@ const tl6 = gsap.timeline({
 });
 tl6.from('.prove-sec02 .prove-text', { x: 0 })
 tl6.from('.prove-sec02 .pr-block', { '--x': 1 }, "<")
-// const cardAni = gsap.timeline(".card-item:nth-child(2)",{
-//     scrollTrigger: {
-//         trigger: '.magazine_section',
-//         start:"0% 0%",
-//         end: "100% 100%",
-//         scrub:1,
-//         markers: true,
-//     },
-// })
-// cardAni.to(cardItem,{
-//     y:100
-// });
-
-
-// const sidepj = gsap.timeline({
-//     scrollTrigger: {
-//         trigger:'.sidepj-sec',
-//         start:"0% 0%",
-//         end:"100% 100%",
-//         scrub:1,
-//         onEnter: function(){
-//             gsap.to('.bottom-overlay',{autoAlpha:0});
-//             document.querySelector('.custom-cursor').classList.add('white');
-//         },
-//         onLeaveBack: function(){
-//             gsap.to('.bottom-overlay',{autoAlpha:1});
-//         }
-//     },
-// });
-
-
-
-
-// news_section js
-
-// const newsSwiper = new Swiper('.news_section .swiper', {
-//     slidesPerView: "auto",
-//     spaceBetween: 10,
-//     navigation: {
-//         nextEl: ".news_section .swiper-button-next",
-//         prevEl: ".news_section .swiper-button-prev"
-//     },
-//     slideToClickedSlide: true,
-// });
 
 
 
@@ -271,6 +178,39 @@ document.querySelectorAll('.tab--btn').forEach(function (tab) {
 
 
 
+
+
+// about section tab list js
+
+
+
+
+
+
+
+
+
+
+// swiper_section js
+const aboutSwiper = new Swiper(".swiper_section .swiper", {
+    grabCursor: true,
+    slidesPerView: "auto",
+    // slidesPerView: 1.1,
+    // effect: "creative",
+    spaceBetween: 20,
+
+    navigation: {
+        nextEl: '.business_section .swiper-button-next',
+        prevEl: '.business_section .swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper_section .swiper-pagination',
+    },
+});
+
+
+
+
 // footer js
 const select = document.querySelector('.select_sub--list');
 
@@ -278,12 +218,88 @@ document.querySelector(".familySite .select_inner .select_tit").addEventListener
     select.classList.toggle('active');
 });
 
+document.querySelector(".iconGoToTop").addEventListener("click", function () {
+    gsap.to(window, {
+        scrollTo: 0,
+        duration: 1.5,
+        ease: "power2.out"
+    });
+});
+
+ScrollTrigger.create({
+    trigger: ".footer",
+    start: "0% 60%",
+    end: "100% 60%",
+    onEnter: () => {
+        document.querySelector(".footerTopBtn").classList.add("active");
+    },
+    onLeaveBack: () => {
+        document.querySelector(".footerTopBtn").classList.remove("active");
+    },
+})
+
+
+
+
+// 타임라인 정의
+const progressBar = gsap.timeline();
+const pointerEl = gsap.timeline();
+
+// 애니메이션 정의
+progressBar.from(".history_bar_on", { height: 0, ease: "none" });
+pointerEl.from(".pointer", { top: 0, ease: "none" });
+
+// ScrollTrigger 연결
+ScrollTrigger.create({
+    animation: progressBar,
+    trigger: ".history_bar",
+    start: "top 300",
+    end: "bottom center",
+    scrub: 0.3,
+});
+
+ScrollTrigger.create({
+    animation: pointerEl,
+    trigger: ".history_bar",
+    start: "top 300",
+    end: "bottom center",
+    scrub: 0.3,
+});
+
+
+
+
+document.querySelectorAll('.year_ctn').forEach((el) => {
+    const yearTitle = el.querySelector('.year_tit');
+    const yearImg = el.querySelector('.year_img');
+    const yearTxt = el.querySelector('.year_txt');
+
+    ScrollTrigger.create({
+        trigger: el,
+        start: "0% 50%",
+        end: "100% 50%",
+        onEnter: () => {
+            yearTitle?.classList.add('active');
+            yearImg?.classList.add('active');
+            yearTxt?.classList.add('active');
+        },
+        onLeaveBack: () => {
+            yearTitle?.classList.remove('active');
+            yearImg?.classList.remove('active');
+            yearTxt?.classList.remove('active');
+        }
+    });
+});
+
+
+
+
+
 
 
 const mm = gsap.matchMedia();
 
-
-mm.add("(min-width: 1400px", function(){
+mm.add("(min-width: 1400px", function () {
     const newsSwiper = new Swiper('.news_section .swiper', {
         slidesPerView: "auto",
         spaceBetween: 10,
@@ -293,12 +309,55 @@ mm.add("(min-width: 1400px", function(){
         },
         slideToClickedSlide: true,
     });
+    const cell = document.querySelector(".visual_section .cell-visual");
+    const cell01 = document.querySelector(".business_section .cell-visual");
 
+    const cellAni = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".visual_section",
+            start: "0% 50%",
+            end: "100% 50%",
+            scrub: 1,
+            onEnterBack: function () {
+                gsap.to(cell, { autoAlpha: 1 });
+            },
+            onLeave: function () {
+                gsap.to(cell, { autoAlpha: 0 });
+            }
+        },
+    });
+    // cellAni.set(cell,{opacity:1});
+    cellAni.to(cell, { yPercent: 100 });
+
+    const cellAni01 = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".business_section",
+            start: "0% 0%",
+            end: "100% 100%",
+            scrub: 1,
+
+            onEnterBack: function () {
+                gsap.to(cell01, { filter: "none" });
+                gsap.to(cell01, { autoAlpha: 1 });
+            },
+
+            onLeave: function () {
+                gsap.to(cell01, { filter: "blur(50px)" });
+                gsap.to(cell01, { autoAlpha: 0 });
+            }
+        },
+    });
+    cellAni01.to(cell01, { display: "block" });
+    cellAni01.to(cell01, { yPercent: 100 });
+    cellAni01.to(cell01, { scale: 1.1 }, "<");
+    cellAni01.to(cell01, { xPercent: 50 }, "<");
+    cellAni01.to(cell01, { scale: 0.8 });
+    cellAni01.to(cell01, { xPercent: 100 }, "<");
 })
 
 
-mm.add("(max-width: 1399px)", function(){
- 
+mm.add("(max-width: 1399px)", function () {
+
     const newsSwiper = new Swiper('.news_section .swiper', {
         slidesPerView: "auto",
         spaceBetween: 10,
@@ -308,5 +367,8 @@ mm.add("(max-width: 1399px)", function(){
         },
         slideToClickedSlide: true,
     });
+
+
+
 
 });
